@@ -39,7 +39,7 @@ class AbstractTask(abc.ABC):
             datasets["test"] = datasets["validation"]
 
         if self.task in ["mr", "cr", "subj", "SST-2", "trec",  "sst-5",
-                         "boolq", "rte", "cb", "wic", "qnli", "qqp", "mrpc"]:
+                         "boolq", "rte", "cb", "wic", "qnli", "qqp", "mrpc", "uanews"]:
             # First filter, then shuffle, otherwise this results in a bug.
             # Samples `num_samples` elements from train as training and development sets.
             sampled_train = []
@@ -160,6 +160,10 @@ class MRPC(QQP):
     labels_list = ['0', '1'] # ["not_equivalent", "equivalent"]
     metric = [metrics.accuracy, metrics.f1]
 
+class UaNews(MR):
+    task = 'uanews'
+    num_labels = 5
+    metric = [metrics.accuracy]
 
 
 TASK_MAPPING = OrderedDict(
@@ -178,7 +182,8 @@ TASK_MAPPING = OrderedDict(
         # glue datasets
         ('qqp', QQP),
         ('qnli', QNLI),
-        ('mrpc', MRPC)
+        ('mrpc', MRPC),
+        ('uanews', UaNews)
     ]
 )
 

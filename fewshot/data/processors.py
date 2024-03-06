@@ -111,6 +111,11 @@ class SST5(MR):
     def get_verbalizers(self):
         return ["terrible", "bad", "okay", "good", "great"]
 
+class UaNews(MR):
+    name = 'uanews'
+    
+    def get_verbalizers(self):
+        return ["спорт", "новини", "бізнес", "політика", "технології"]
 
 class Subj(AbstractProcessor):
     name = "subj"
@@ -449,7 +454,8 @@ PROCESSOR_MAPPING = OrderedDict(
         #glue datasets 
         ('qnli', QNLI),
         ('qqp', QQP),
-        ('mrpc', MRPC)
+        ('mrpc', MRPC),
+        ('uanews', UaNews)
     ]
 )
 
